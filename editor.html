@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mermaid Canvas — visual editor for Mermaid diagrams</title>
+<meta name="description" content="Draw Mermaid diagrams without writing Mermaid. Point-and-click editor that keeps your Mermaid source as the source of truth.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='6' width='26' height='20' rx='5' fill='%236c8cff'/%3E%3Ccircle cx='9' cy='16' r='3' fill='%230b1020'/%3E%3Cpath d='M12 16h8M20 12l5 4-5 4' stroke='%230b1020' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="editor-body">
+<nav class="nav">
+  <a class="logo" href="index.html">Mermaid<span class="dot">.</span>Canvas</a>
+  <a class="navlink active" href="editor.html">Editor</a>
+  <a class="navlink" href="pricing.html">Pricing</a>
+  <span class="spacer"></span>
+  <a class="navlink" href="index.html">← Landing</a>
+  <span class="badge warn" id="autosave-badge" style="display:none"></span>
+</nav>
+
+<div class="editor-toolbar">
+  <div class="group">
+    <label for="theme">Theme</label>
+    <select id="theme">
+      <option value="default">Default</option>
+      <option value="neutral">Neutral</option>
+      <option value="dark">Dark</option>
+      <option value="forest">Forest</option>
+    </select>
+  </div>
+  <div class="group">
+    <label for="direction">Direction</label>
+    <select id="direction">
+      <option value="TD">Top→Down</option>
+      <option value="LR">Left→Right</option>
+      <option value="RL">Right→Left</option>
+      <option value="BT">Bottom→Up</option>
+    </select>
+  </div>
+  <div class="group">
+    <button class="btn ghost small" id="import-btn" title="Import a .mmd / .md / .txt file">Import…</button>
+    <input type="file" id="import-file" accept=".mmd,.md,.txt,.mermaid,.mmdc" style="display:none">
+    <button class="btn ghost small" id="export-png" title="Download as PNG (free)">PNG</button>
+    <button class="btn ghost small" id="export-svg" title="Pro feature — join the waitlist to unlock">SVG</button>
+    <button class="btn ghost small" id="export-pdf" title="Pro feature — join the waitlist to unlock">PDF</button>
+    <button class="btn ghost small" id="export-copy" title="Copy the Mermaid source">Copy code</button>
+  </div>
+  <div class="group">
+    <button class="btn ghost small" id="reset-btn">Reset demo</button>
+  </div>
+</div>
+
+<div class="editor-main">
+  <div class="editor-code">
+    <div class="code-head">
+      Mermaid source <span class="badge muted">source of truth</span>
+      <span class="spacer"></span>
+      <span style="display:flex;align-items:center;gap:8px" id="restore-banner">
+        <span>Restored autosave from <b id="restore-when"></b></span>
+        <button class="btn ghost small" id="clear-autosave">clear</button>
+      </span>
+    </div>
+    <textarea id="code" spellcheck="false" aria-label="Mermaid source code"></textarea>
+    <div class="errbar" id="errbar"></div>
+    <div class="statusbar">
+      <span id="status">○ loading…</span>
+      <span class="spacer"></span>
+      <span>Click any node or edge to edit it visually. Drag-reposition: roadmap.</span>
+    </div>
+  </div>
+
+  <div class="editor-canvas" id="canvas">
+    <div class="svg-wrap" id="svg-wrap"></div>
+    <div class="empty-state">rendering…</div>
+
+    <div class="inspector" id="inspector">
+      <button class="close-x" id="ins-close" aria-label="Close inspector">×</button>
+      <span class="sel-type" id="ins-type"></span>
+      <h4 id="ins-title"></h4>
+      <div class="field">
+        <label for="ins-label">Label</label>
+        <input type="text" id="ins-label" autocomplete="off">
+      </div>
+      <div class="field color-row" id="ins-fill-row">
+        <label for="ins-fill" style="flex:1">Fill</label>
+        <input type="color" id="ins-fill"><span id="ins-fill-hex"></span>
+      </div>
+      <div class="field color-row">
+        <label for="ins-stroke" style="flex:1">Stroke</label>
+        <input type="color" id="ins-stroke"><span id="ins-stroke-hex"></span>
+      </div>
+      <div class="field color-row" id="ins-color-row">
+        <label for="ins-color" style="flex:1">Text</label>
+        <input type="color" id="ins-color"><span id="ins-color-hex"></span>
+      </div>
+      <div class="field" id="ins-width-row">
+        <label for="ins-width">Stroke width (px)</label>
+        <input type="number" id="ins-width" min="1" max="12" step="0.5" value="2">
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="apply-btn">Apply</button>
+      </div>
+      <p class="hint" id="ins-hint"></p>
+    </div>
+
+    <div class="palette">
+      <button class="btn small" id="palette-add-node">+ Node</button>
+      <button class="btn small" id="palette-add-edge">+ Edge</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="palette-modal">
+  <div class="modal">
+    <h3 id="palette-kind">Add node</h3>
+    <div class="palette-node-fields">
+      <div class="field">
+        <label for="palette-id">Node id (used in the source)</label>
+        <input type="text" id="palette-id" placeholder="e.g. H" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="palette-label">Label (shown on the diagram)</label>
+        <input type="text" id="palette-label" placeholder="e.g. Harvest leads" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="palette-shape">Shape</label>
+        <select id="palette-shape">
+          <option value="rect">Rectangle</option>
+          <option value="round">Rounded</option>
+          <option value="stadium">Stadium</option>
+          <option value="circle">Circle</option>
+          <option value="diamond">Diamond</option>
+          <option value="hex">Hexagon</option>
+        </select>
+      </div>
+    </div>
+    <div class="palette-edge-fields" style="display:none">
+      <div class="field">
+        <label for="palette-from">From node id</label>
+        <input type="text" id="palette-from" placeholder="e.g. A" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="palette-to">To node id</label>
+        <input type="text" id="palette-to" placeholder="e.g. B" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="palette-text">Edge label (optional)</label>
+        <input type="text" id="palette-text" placeholder="e.g. sends to" autocomplete="off">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost small" id="palette-close">Cancel</button>
+      <button class="btn primary small" id="palette-submit">Insert</button>
+    </div>
+    <small>Snippets are inserted at your cursor in the source pane, then re-rendered.</small>
+  </div>
+</div>
+
+<script src="vendor/mermaid.min.js"></script>
+<script src="js/lead.js"></script>
+<script src="js/mermaid-app.js"></script>
+</body>
+</html>

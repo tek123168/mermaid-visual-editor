@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mermaid Canvas — Draw Mermaid diagrams without writing Mermaid</title>
+<meta name="description" content="A visual, point-and-click editor for Mermaid diagrams. Your Mermaid source stays the source of truth: click nodes and edges to edit labels and colors, export PNG/SVG/PDF, and commit the code to your repo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='6' width='26' height='20' rx='5' fill='%236c8cff'/%3E%3Ccircle cx='9' cy='16' r='3' fill='%230b1020'/%3E%3Cpath d='M12 16h8M20 12l5 4-5 4' stroke='%230b1020' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="index.html">Mermaid<span class="dot">.</span>Canvas</a>
+  <a class="navlink active" href="index.html">Overview</a>
+  <a class="navlink" href="editor.html">Editor</a>
+  <a class="navlink" href="pricing.html">Pricing</a>
+  <span class="spacer"></span>
+  <a class="btn primary small" href="editor.html">Open the editor</a>
+</nav>
+
+<header class="hero">
+  <h1>Draw Mermaid diagrams<br><span class="grad">without writing Mermaid.</span></h1>
+  <p class="sub">Mermaid Canvas is a visual, point-and-click editor for Mermaid diagrams. Your Mermaid source stays the source of truth — click any node or edge to edit labels, colors, and connectors, then export PNG/SVG/PDF and commit the code to your repo.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="editor.html">Try the live editor — free</a>
+    <a class="btn" href="#waitlist">Get early access</a>
+  </div>
+</header>
+
+<div class="editor-preview">
+  <div class="frame">
+    <div class="frame-bar">
+      <span class="circle"></span><span class="circle"></span><span class="circle"></span>
+      <span class="fake-url">mermaid-canvas.app/editor</span>
+    </div>
+    <div class="mock">
+      <div class="pane code">flowchart TD
+  A[Visitor] --> B[Landing page]
+  B -- clicks Editor --> C[Mermaid Canvas]
+  C --> D{Like what you drew?}
+  D -->|Yes| E[Join the waitlist]
+  D -->|No| F[Import your own .mmd]
+  E --> G[Early access + Pro]
+  F --> G</div>
+      <div class="pane canvas">
+        <svg viewBox="0 0 430 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Preview of the Mermaid Canvas editor rendering a flowchart">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#6c8cff"/>
+            </marker>
+          </defs>
+          <!-- A -->
+          <rect x="20" y="14" width="110" height="34" rx="7" fill="#e1ecff" stroke="#1f3a93" stroke-width="1.5"/>
+          <text x="75" y="35" text-anchor="middle" font-size="12" fill="#0b1020" font-family="sans-serif">Visitor</text>
+          <line x1="130" y1="31" x2="168" y2="31" stroke="#6c8cff" stroke-width="1.6" marker-end="url(#arr)"/>
+          <!-- B -->
+          <rect x="168" y="14" width="116" height="34" rx="7" fill="#e1ecff" stroke="#1f3a93" stroke-width="1.5"/>
+          <text x="226" y="35" text-anchor="middle" font-size="12" fill="#0b1020" font-family="sans-serif">Landing page</text>
+          <line x1="284" y1="31" x2="322" y2="31" stroke="#6c8cff" stroke-width="1.6" marker-end="url(#arr)"/>
+          <!-- C -->
+          <rect x="320" y="14" width="96" height="34" rx="20" fill="#e1ecff" stroke="#1f3a93" stroke-width="1.5"/>
+          <text x="368" y="35" text-anchor="middle" font-size="12" fill="#0b1020" font-family="sans-serif">Editor</text>
+          <path d="M368 48 V74 H110" fill="none" stroke="#6c8cff" stroke-width="1.6" marker-end="url(#arr)"/>
+          <!-- D -->
+          <polygon points="110,78 170,118 110,158 50,118" fill="#fde68a" stroke="#b45309" stroke-width="1.5"/>
+          <text x="110" y="114" text-anchor="middle" font-size="11" fill="#78350f" font-family="sans-serif">Like it?</text>
+          <text x="110" y="128" text-anchor="middle" font-size="9" fill="#78350f" font-family="sans-serif">(click to edit)</text>
+          <path d="M170 118 H250" fill="none" stroke="#6c8cff" stroke-width="1.6" marker-end="url(#arr)"/>
+          <text x="210" y="108" text-anchor="middle" font-size="9" fill="#9aa5d0" font-family="sans-serif">Yes</text>
+          <!-- E -->
+          <rect x="252" y="102" width="118" height="34" rx="7" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
+          <text x="311" y="123" text-anchor="middle" font-size="12" fill="#0b1020" font-family="sans-serif">Join waitlist</text>
+          <path d="M110 158 V210 H60 L80 230 L100 210 H110" fill="none" stroke="#6c8cff" stroke-width="1.6" marker-end="url(#arr)"/>
+          <text x="150" y="205" text-anchor="middle" font-size="9" fill="#9aa5d0" font-family="sans-serif">No</text>
+          <!-- F -->
+          <rect x="28" y="212" width="130" height="34" rx="7" fill="#e1ecff" stroke="#1f3a93" stroke-width="1.5"/>
+          <text x="93" y="233" text-anchor="middle" font-size="12" fill="#0b1020" font-family="sans-serif">Import .mmd</text>
+          <path d="M158 229 H230 L230 182 H250" fill="none" stroke="#6c8cff" stroke-width="1.6" marker-end="url(#arr)"/>
+          <path d="M311 136 V180 H340 V210 H311" fill="none" stroke="#6c8cff" stroke-width="1.6" marker-end="url(#arr)"/>
+          <!-- G -->
+          <rect x="252" y="212" width="118" height="34" rx="7" fill="#ddddff" stroke="#4c1d95" stroke-width="1.5"/>
+          <text x="311" y="233" text-anchor="middle" font-size="12" fill="#0b1020" font-family="sans-serif">Early access</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <h2>Why Mermaid Canvas</h2>
+  <p class="lead">Mermaid is everywhere — GitHub, GitLab, Notion, Obsidian — but it is text-first and unforgiving. General diagram tools don't round-trip with Mermaid code. Mermaid Canvas closes that gap.</p>
+  <div class="grid3">
+    <div class="card">
+      <div class="ico">⌨️</div>
+      <h3>Text-first and unforgiving</h3>
+      <p>Mermaid syntax errors break your render, and there is no way to fix them by looking at the picture. Canvas surfaces errors with line numbers instantly — and lets you fix them by clicking the diagram.</p>
+    </div>
+    <div class="card">
+      <div class="ico">📐</div>
+      <h3>Layout is auto-computed</h3>
+      <p>You can't nudge a node without hacking coordinates or loop strategies. Canvas keeps Mermaid's auto-layout (so it still renders in GitHub) but edits labels and styles by point-and-click.</p>
+    </div>
+    <div class="card">
+      <div class="ico">🔁</div>
+      <h3>Tools don't round-trip</h3>
+      <p>Draw.io, Excalidraw and Miro don't speak Mermaid. Paste code, tweak it visually, export PNG/SVG and commit the same Mermaid source back to the repo — no dead-ends.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>How it works</h2>
+  <div class="how">
+    <div class="step"><h3>Import</h3><p>Paste Mermaid code or drop in a .mmd / .md file. Start from a demo and modify it.</p></div>
+    <div class="step"><h3>Click to edit</h3><p>Click any node or edge. Change labels, fill colors, strokes and text colors — the source updates in real time, both ways.</p></div>
+    <div class="step"><h3>Export</h3><p>Download clean PNG (free) or SVG/PDF (Pro) for READMEs, docs, Notion and slide decks.</p></div>
+    <div class="step"><h3>Commit</h3><p>Copy the Mermaid code back into your repo. The diagram lives in the codebase, exactly like your team wanted.</p></div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <h2 style="text-align:center">Pricing</h2>
+  <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Launch pricing — early access members lock these prices.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="plan">Free</div>
+      <div class="price">$0 <small>/ forever</small></div>
+      <ul>
+        <li>Unlimited local diagrams</li>
+        <li>Click-to-edit node &amp; edge styling</li>
+        <li>PNG export</li>
+        <li>localStorage autosave</li>
+        <li class="no">SVG / PDF export</li>
+        <li class="no">Share links</li>
+      </ul>
+      <a class="btn" href="editor.html" style="width:100%;justify-content:center">Start free</a>
+    </div>
+    <div class="price-card pro">
+      <span class="badge warn" style="position:absolute;top:14px;right:14px">launch pricing</span>
+      <div class="plan">Pro</div>
+      <div class="price">$8 <small>/ month</small></div>
+      <ul>
+        <li>Everything in Free</li>
+        <li>High-res + SVG/PDF export</li>
+        <li>Share links (roadmap)</li>
+        <li>Team themes &amp; saved palettes</li>
+        <li>Priority features &amp; support</li>
+      </ul>
+      <a class="btn primary" href="#waitlist" style="width:100%;justify-content:center">Join the waitlist</a>
+    </div>
+  </div>
+  <p class="launch-note">Launch-pricing promise: waitlist members get Pro at $8/mo when billing opens.</p>
+</section>
+
+<section class="section">
+  <div class="waitlist-wrap" id="waitlist">
+    <h2>Get early access</h2>
+    <p class="sub">Be first in line for Mermaid Canvas. Early access members lock in $8/mo launch pricing.</p>
+    <form class="wl-form" id="wl-form-bottom">
+      <input type="email" id="wl-email-bottom" placeholder="you@company.com" required autocomplete="email">
+      <button type="submit" class="btn primary">Join waitlist</button>
+    </form>
+    <div class="wl-msg" id="wl-msg-bottom"></div>
+    <p class="wl-honest" id="wl-honest">This MVP saves signups locally in your browser (localStorage) — no server yet. We'll onboard you from this list when billing launches. You can also <a href="#" id="wl-export-bottom">export your signups (.json)</a> or <a href="#" id="wl-mailto-bottom">email them to yourself</a>.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Mermaid Canvas is an unofficial, independent tool and is <strong>not affiliated with the Mermaid project</strong>.<br>
+  Diagrams are rendered with the open-source Mermaid library (MIT).</p>
+  <p class="liveurl" id="live-url"></p>
+  <p><a href="editor.html">Editor</a> · <a href="pricing.html">Pricing</a> · <a href="#" id="wl-export-footer">Export waitlist</a></p>
+</footer>
+
+<script src="js/lead.js"></script>
+<script>
+(function () {
+  'use strict';
+  function wireForm(inputId, msgId, honestId, source) {
+    var form = document.getElementById('wl-form-' + inputId.split('-').pop()) || null;
+    var input = document.getElementById(inputId);
+    var msg = document.getElementById(msgId);
+    if (!input || !form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var res = window.LeadHub.add(input.value, source);
+      if (!res.ok) { msg.className = 'wl-msg err'; msg.textContent = res.error; return; }
+      input.value = '';
+      msg.className = 'wl-msg ok';
+      msg.textContent = res.duplicate
+        ? 'You are already on the waitlist — thank you!'
+        : 'You are on the waitlist — we will email you at launch. ' +
+          (window.LeadHub.list().length > 1 ? '(' + window.LeadHub.list().length + ' signups total so far, saved in this browser)' : 'Saved in this browser.');
+    });
+  }
+  wireForm('wl-email-bottom', 'wl-msg-bottom', null, 'landing-hero');
+
+  var exportBtn = document.getElementById('wl-export-bottom');
+  if (exportBtn) exportBtn.addEventListener('click', function (e) { e.preventDefault(); window.LeadHub.exportFile(); });
+  var mailtoBtn = document.getElementById('wl-mailto-bottom');
+  if (mailtoBtn) mailtoBtn.addEventListener('click', function (e) { e.preventDefault(); window.location.href = window.LeadHub.mailtoLink(); });
+  var footerExport = document.getElementById('wl-export-footer');
+  if (footerExport) footerExport.addEventListener('click', function (e) { e.preventDefault(); window.LeadHub.exportFile(); });
+})();
+</script>
+</body>
+</html>

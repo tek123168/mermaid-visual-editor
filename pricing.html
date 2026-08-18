@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Mermaid Canvas</title>
+<meta name="description" content="Mermaid Canvas pricing: Free for unlimited local diagrams and PNG export. Pro $8/mo at launch for high-res SVG/PDF export, share links, team themes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='6' width='26' height='20' rx='5' fill='%236c8cff'/%3E%3Ccircle cx='9' cy='16' r='3' fill='%230b1020'/%3E%3Cpath d='M12 16h8M20 12l5 4-5 4' stroke='%230b1020' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="index.html">Mermaid<span class="dot">.</span>Canvas</a>
+  <a class="navlink" href="index.html">Overview</a>
+  <a class="navlink" href="editor.html">Editor</a>
+  <a class="navlink active" href="pricing.html">Pricing</a>
+  <span class="spacer"></span>
+  <a class="btn primary small" href="editor.html">Open the editor</a>
+</nav>
+
+<section class="section" style="text-align:center">
+  <h1 style="font-size:34px;letter-spacing:-.4px;margin:0 0 8px">Simple pricing</h1>
+  <p class="lead" style="margin:0 auto 36px;max-width:560px">Start free today. Upgrade only if you need high-res exports and share links. Early access members lock launch pricing forever.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="plan">Free</div>
+      <div class="price">$0 <small>/ forever</small></div>
+      <ul>
+        <li>Unlimited local diagrams</li>
+        <li>Live two-way code sync (Mermaid source stays source of truth)</li>
+        <li>Click-to-edit labels, fills, strokes, text colors</li>
+        <li>Theme &amp; direction controls</li>
+        <li>PNG export (standard res)</li>
+        <li>localStorage autosave</li>
+        <li class="no">SVG / PDF export</li>
+        <li class="no">Share links</li>
+        <li class="no">Priority features</li>
+      </ul>
+      <a class="btn" href="editor.html" style="width:100%;justify-content:center">Start free</a>
+    </div>
+    <div class="price-card pro">
+      <span class="badge warn" style="position:absolute;top:14px;right:14px">launch pricing</span>
+      <div class="plan">Pro</div>
+      <div class="price">$8 <small>/ month</small></div>
+      <ul>
+        <li>Everything in Free</li>
+        <li>High-res PNG + SVG + PDF export</li>
+        <li>Export without watermarks</li>
+        <li>Share links (roadmap)</li>
+        <li>Team themes &amp; saved palettes</li>
+        <li>Priority features &amp; support</li>
+        <li>Billed annually or monthly — cancel anytime</li>
+      </ul>
+      <a class="btn primary" href="#waitlist" style="width:100%;justify-content:center">Join the waitlist</a>
+    </div>
+  </div>
+  <p class="launch-note">Launch pricing locked for the first 500 waitlist members: Pro $8/mo (reg. $12/mo).</p>
+
+  <div class="waitlist-wrap" id="waitlist">
+    <h2>Get early access</h2>
+    <p class="sub">Join the waitlist below. When billing launches, early access members get Pro at $8/mo.</p>
+    <form class="wl-form" id="wl-form-pricing">
+      <input type="email" id="wl-email-pricing" placeholder="you@company.com" required autocomplete="email">
+      <button type="submit" class="btn primary">Join waitlist</button>
+    </form>
+    <div class="wl-msg" id="wl-msg-pricing"></div>
+    <p class="wl-honest">This MVP saves signups locally in your browser (localStorage) — there is no server yet. Your signup is stored on this device and will be collected at launch handoff. You can also <a href="#" id="wl-export-pricing">export your signups (.json)</a>.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Mermaid Canvas is an unofficial, independent tool and is <strong>not affiliated with the Mermaid project</strong>.<br>
+  Diagrams are rendered with the open-source Mermaid library (MIT).</p>
+  <p class="liveurl" id="live-url"></p>
+  <p><a href="editor.html">Editor</a> · <a href="index.html">Overview</a></p>
+</footer>
+
+<script src="js/lead.js"></script>
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('wl-form-pricing');
+  var input = document.getElementById('wl-email-pricing');
+  var msg = document.getElementById('wl-msg-pricing');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var res = window.LeadHub.add(input.value, 'pricing');
+    if (!res.ok) { msg.className = 'wl-msg err'; msg.textContent = res.error; return; }
+    input.value = '';
+    msg.className = 'wl-msg ok';
+    msg.textContent = res.duplicate
+      ? 'You are already on the waitlist — thank you!'
+      : 'You are on the waitlist — we will email you at launch. Saved locally in this browser' + (window.LeadHub.list().length > 1 ? ' (' + window.LeadHub.list().length + ' total)' : '') + '.';
+  });
+  var exportBtn = document.getElementById('wl-export-pricing');
+  if (exportBtn) exportBtn.addEventListener('click', function (e) { e.preventDefault(); window.LeadHub.exportFile(); });
+})();
+</script>
+</body>
+</html>
